@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <title>Sonotype — Text to Music</title>
+  <meta name="description" content="Turn text, numbers and symbols into deterministic melodies and harmony in your browser.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">GIANX LABS / EXPERIMENT 01</p>
+        <h1>SONOTYPE</h1>
+        <p class="subtitle">Turn text, numbers and symbols into music.</p>
+      </div>
+      <div class="key-badge" id="keyBadge">C MAJOR</div>
+    </header>
+
+    <section class="workspace">
+      <div class="panel input-panel">
+        <div class="panel-head">
+          <label for="sourceText">INPUT</label>
+          <span id="charCount">0 characters</span>
+        </div>
+        <textarea id="sourceText" maxlength="2000" spellcheck="false" placeholder="Type anything…">Hello world 314159</textarea>
+        <p class="hint">The same input and musical settings always generate the same composition.</p>
+      </div>
+
+      <div class="panel output-panel">
+        <div class="now-grid">
+          <div>
+            <span class="small-label">MELODY</span>
+            <strong id="nowNote">—</strong>
+          </div>
+          <div>
+            <span class="small-label">HARMONY</span>
+            <strong id="nowChord">—</strong>
+          </div>
+        </div>
+        <div class="stats" id="stats">—</div>
+        <div class="event-strip" id="eventStrip" aria-label="Generated melody"></div>
+      </div>
+    </section>
+
+    <section class="controls panel">
+      <div class="control">
+        <label for="key">KEY</label>
+        <select id="key">
+          <option value="0">C</option><option value="1">C♯ / D♭</option><option value="2">D</option>
+          <option value="3">D♯ / E♭</option><option value="4">E</option><option value="5">F</option>
+          <option value="6">F♯ / G♭</option><option value="7">G</option><option value="8">G♯ / A♭</option>
+          <option value="9">A</option><option value="10">A♯ / B♭</option><option value="11">B</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="scale">SCALE</label>
+        <select id="scale">
+          <option value="major">Major</option>
+          <option value="minor">Natural minor</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="tempo">TEMPO <span id="tempoValue">100 BPM</span></label>
+        <input id="tempo" type="range" min="50" max="180" value="100">
+      </div>
+
+      <div class="control">
+        <label for="melodyInstrument">MELODY INSTRUMENT</label>
+        <select id="melodyInstrument">
+          <option value="piano">Piano</option>
+          <option value="pluck">Pluck</option>
+          <option value="bell">Bell</option>
+          <option value="organ">Organ</option>
+          <option value="lead">Synth Lead</option>
+          <option value="flute">Flute-ish</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="chordInstrument">CHORD INSTRUMENT</label>
+        <select id="chordInstrument">
+          <option value="pad">Warm Pad</option>
+          <option value="piano">Piano</option>
+          <option value="organ">Organ</option>
+          <option value="strings">Strings-ish</option>
+          <option value="soft">Soft Synth</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="harmony panel">
+      <div class="panel-head">
+        <span>BACKGROUND HARMONY</span>
+        <span>1 chord / 4 beats</span>
+      </div>
+      <div class="chord-strip" id="chordStrip"></div>
+    </section>
+
+    <section class="transport">
+      <button class="primary" id="playBtn">▶ PLAY</button>
+      <button id="stopBtn">■ STOP</button>
+      <button id="midiBtn">↓ MIDI</button>
+      <button id="wavBtn">↓ WAV</button>
+    </section>
+
+    <p class="status" id="status" aria-live="polite">Ready.</p>
+
+    <section class="rules panel">
+      <div>
+        <span class="small-label">ENGINE</span>
+        <p>Deterministic composition. Key, scale and tempo shape the rendering; instrument choice changes timbre, not the encoded notes.</p>
+      </div>
+      <div>
+        <span class="small-label">CURRENT PROTOTYPE</span>
+        <p>All Unicode input is supported. A–G / R musical-language rules can be layered into the parser as the encoding system develops.</p>
+      </div>
+    </section>
+
+    <footer>CREATED BY GIANX LABS</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
